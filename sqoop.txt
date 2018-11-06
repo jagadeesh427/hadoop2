@@ -43,3 +43,5 @@ hadoop fs -rm -R /user/hive/warehouse/retail.db/customers
 
 
 
+
+
