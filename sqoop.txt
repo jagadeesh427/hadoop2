@@ -37,7 +37,18 @@ hadoop fs -rm -R /user/hive/warehouse/retail.db/departments
 hadoop fs -rm -R /user/hive/warehouse/retail.db/categories
 hadoop fs -rm -R /user/hive/warehouse/retail.db/customers
 
-
+sqoop import 
+--connect jdbc:mysql://ms.itversity.com:3306/retail_db 
+--username retail_user
+--password itversity 
+--table departments 
+--fields-terminated-by '|' 
+--lines-terminated-by '\n' 
+--hive-home /user/hive/warehouse/retail.db 
+--hive-import 
+--hive-table departments_new 
+--create-hive-table 
+--outdir java_files
 
 
 
