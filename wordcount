@@ -61,3 +61,39 @@ object wordcount{
     }
   }
 }
+
+
+
+
+## to run in UAT
+
+start-master.sh
+start-slave.sh  spark://Apples-MacBook-pro.local:7077
+
+how to run Yarn mode:
+
+sbt package( copy the jar file)
+
+ship the jar file to cluster
+
+scp /Users/jagadeeshyadav/IdeaProjects/gettingstarted/target/scala-2.10/gettingstarted_2.10-0.1.jar jagadeeshkanne27@gw03.itversity.com:~
+## got he cluster ##
+check the jar file
+
+run the below command
+
+spark-submit --class wordcount-WordCount \
+--master yarn \
+--gettingstarted_2.10-0.1.jar \
+--prod /user/jagadeeshkanne27/wordcount.txt /user/jagadeeshkanne27/wordcount3
+
+
+
+
+
+
+
+
+
+
+
