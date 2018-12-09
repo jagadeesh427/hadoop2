@@ -30,3 +30,34 @@ object wordcount{
   }
 }
 
+CODE:
+
+package wordcount
+
+import org.apache.spark.{SparkConf,SparkContext}
+import org.apache.hadoop.fs._
+
+
+
+object wordcount{
+  def main(args: Array[String]) = {
+  val conf = new SparkConf().setAppName("word count").setMaster("local")
+  val sc = new SparkContext(conf)
+
+    val fs = FileSystem.get(sc.hadoopConfiguration)
+
+  val inputpath = args(0)
+  val output = args(1)
+
+    if(fs.exists(new Path(inputpath))){
+      println("Input path does not exist")
+    } else {
+      if (fs.exists(new Path(output)))
+        fs.delete(new Path(output), true)
+      val lines = sc.textFile(inputpath)
+      val linesflatmap = lines.flatMap(x => x.split(" "))
+      val result = linesflatmap.map(x => (x, 1)).reduceByKey((x, y) => x + y)
+      result.saveAsTextFile(output)
+    }
+  }
+}
