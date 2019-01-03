@@ -6,3 +6,42 @@ edit /etc/ambari-agent/conf/*.ini to point ambari server
 setup ambari-server(ambari-server setup)
 start ambari-server and ambari-agent components
 continue the installation with ambari(http://ambari-server:8080/)
+
+
+set up instances 3nodes
+
+addd pem file
+
+ssh-add -K /Users/jagadeeshyadav/Desktop/demo_key.pem
+login into server
+
+ssh ec2-user@ec2-54-153-3-24.us-west-1.compute.amazonaws.com
+
+do below steps on all nodes
+
+sudo su -
+service iptables stop
+chkconfig iptables off
+vi /etc/selinux/config( disable SELINUX)
+cd /etc/yum.repos.d/
+
+wget -nv http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.4.3.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
+yum -y install ambari-server( on maseter node)
+yum -y install ambari-agent ( on  all nodes(master and slave nodes))
+hostname -f ( master node)
+vi /etc/ambari-agent/conf/ambari-agent-ini( on all nodes)
+replace hostname with master node)
+ambari-server setup
+service ambari-server start( only master node)
+service ambari-agent start( on all nodes)
+chkconfig ambari-agent on( on all nodes)
+
+got to the browser
+
+http://ec2-54-153-3-24.us-west-1.compute.amazonaws.com:8080
+
+go ahead with installation
+
+
+
+
