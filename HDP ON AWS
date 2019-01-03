@@ -1,0 +1,8 @@
+set up instances in AWS
+Download ambari.repo file and save to /etc/yum.repos.d/
+yum -y install ambari-server on server machine
+yum -y install ambari-agent on all slave nodes
+edit /etc/ambari-agent/conf/*.ini to point ambari server
+setup ambari-server(ambari-server setup)
+start ambari-server and ambari-agent components
+continue the installation with ambari(http://ambari-server:8080/)
