@@ -1,0 +1,3 @@
+pyspark
+
+for i in sc.textFile("/users/jagadeeshyadav/smaple.txt").collect(): print(i)
